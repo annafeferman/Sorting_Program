@@ -4,6 +4,28 @@ import timeit  # timeit для рассчета времени выполнен�
 
 class DataInput:
 
+    def validate_array_length(self, text):
+        try:
+            res = int(text)
+            if res <= 0:
+                return False
+            return res
+        except(TypeError, ValueError):
+            return False
+
+    def validate_array(self, text):
+        delimeter = " "
+        split_array = text.split(delimeter)
+        res_array = []
+        try:
+            for number in split_array:
+                array_element = int(number)
+                res_array.append(array_element)
+            return res_array
+        except(TypeError, ValueError):
+            return False
+
+
     def arrayInput(self):
         while True:
             try:
@@ -202,5 +224,3 @@ class RunProgram:
             else:
                 break
 
-
-RunProgram.Run(RunProgram)
