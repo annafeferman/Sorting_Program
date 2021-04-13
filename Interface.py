@@ -63,22 +63,22 @@ class Interface:
 
 
 def on_sort_clicked():
+    flag = validate_data_manual()
     selected_method = Interface.method_choice_list.curselection()
     selected_up_down = Interface.up_down_choice.get()
-    array = sp.validate_array(Interface.manual_array_input_field.get())
-    flag = validate_data()
+    array = sp.DataValidation.validate_array(sp.DataValidation, Interface.manual_array_input_field.get())
     if flag:
-        Interface.output_label_1.insert(0.0, array)
+        Interface.output_label_1.insert(0.0, Interface.manual_array_input_field.get())
         if selected_method == (4,):
-            Interface.output_label_2.insert(0.0, sp.bubbleSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.bubbleSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (3,):
-            Interface.output_label_2.insert(0.0, sp.selectionSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.selectionSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (2,):
-            Interface.output_label_2.insert(0.0, sp.insertionSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.insertionSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (1,):
-            Interface.output_label_2.insert(0.0, sp.cocktailSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.cocktailSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (0,):
-            Interface.output_label_2.insert(0.0, sp.shellSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.shellSort(sp.ArraySort, array, selected_up_down))
         Interface.output_label_3.insert(0.0, sp.ExecutionTime())
     else:
         if_mistake()
@@ -87,38 +87,49 @@ def on_sort_clicked():
 def auto_array_sort():
     selected_method = Interface.method_choice_list.curselection()
     selected_up_down = Interface.up_down_choice.get()
-    length_valid = sp.validate_array(Interface.array_length_input_field.get())
-    array_length = sp.validate_array_length(Interface.array_length_input_field.get())
-    array = sp.auto_array_input(array_length)
-    flag = validate_data()
+    array_length = sp.DataValidation.validate_array_length(sp.DataValidation, Interface.array_length_input_field.get())
+    array = sp.DataValidation.auto_array_input(sp.DataValidation, array_length)
+    flag = validate_data_auto()
     if flag:
         Interface.output_label_1.insert(0.0, array)
         if selected_method == (4,):
-            Interface.output_label_2.insert(0.0, sp.bubbleSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.bubbleSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (3,):
-            Interface.output_label_2.insert(0.0, sp.selectionSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.selectionSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (2,):
-            Interface.output_label_2.insert(0.0, sp.insertionSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.insertionSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (1,):
-            Interface.output_label_2.insert(0.0, sp.cocktailSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.cocktailSort(sp.ArraySort, array, selected_up_down))
         elif selected_method == (0,):
-            Interface.output_label_2.insert(0.0, sp.shellSort(array, selected_up_down))
+            Interface.output_label_2.insert(0.0, sp.ArraySort.shellSort(sp.ArraySort, array, selected_up_down))
         Interface.output_label_3.insert(0.0, sp.ExecutionTime())
     else:
         if_mistake()
 
 
-def validate_data():
-    length_valid = sp.validate_array(Interface.array_length_input_field.get())
-    array_valid = sp.validate_array(Interface.manual_array_input_field.get())
-    array_length = sp.validate_array_length(Interface.array_length_input_field.get())
-    array = sp.validate_array(Interface.manual_array_input_field.get())
+def validate_data_manual():
+    array_valid = sp.DataValidation.validate_array(sp.DataValidation, Interface.manual_array_input_field.get())
+    array = sp.DataValidation.validate_array(sp.DataValidation, Interface.manual_array_input_field.get())
     sel_m = Interface.method_choice_list.curselection()
     if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ):
         method_is_selected = True
     else:
         method_is_selected = False
-    if array and (len(array) == array_length) and length_valid and array_valid and method_is_selected:
+    if array and array_valid and method_is_selected:
+        flag = True
+    else:
+        flag = False
+    return flag
+
+
+def validate_data_auto():
+    length_valid = sp.DataValidation.validate_array(sp.DataValidation, Interface.array_length_input_field.get())
+    sel_m = Interface.method_choice_list.curselection()
+    if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ):
+        method_is_selected = True
+    else:
+        method_is_selected = False
+    if length_valid and method_is_selected:
         flag = True
     else:
         flag = False
