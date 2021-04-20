@@ -102,5 +102,6 @@ class ArraySort:
 
 
 def ExecutionTime():
-    execution_time = timeit.timeit(number=100000)
-    return execution_time
+    execution_time = int(timeit.timeit(number=100000) * 10000)/10000
+    result = str(execution_time) + " seconds"
+    return result
