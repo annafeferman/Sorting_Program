@@ -111,7 +111,7 @@ def validate_data_manual():
     array_valid = sp.DataValidation.validate_array(sp.DataValidation, Interface.manual_array_input_field.get())
     array = sp.DataValidation.validate_array(sp.DataValidation, Interface.manual_array_input_field.get())
     sel_m = Interface.method_choice_list.curselection()
-    if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ):
+    if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ) or sel_m == (4, ):
         method_is_selected = True
     else:
         method_is_selected = False
@@ -125,7 +125,7 @@ def validate_data_manual():
 def validate_data_auto():
     length_valid = sp.DataValidation.validate_array(sp.DataValidation, Interface.array_length_input_field.get())
     sel_m = Interface.method_choice_list.curselection()
-    if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ):
+    if sel_m == (0, ) or sel_m == (1, ) or sel_m == (2, ) or sel_m == (3, ) or sel_m == (4, ):
         method_is_selected = True
     else:
         method_is_selected = False
